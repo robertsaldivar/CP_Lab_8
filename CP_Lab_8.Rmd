@@ -1,0 +1,53 @@
+---
+title: "CP Lab 8"
+author: "Robert Saldivar"
+date: "May 22, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the libraries into this R session
+library(raster)       #Main raster library with nearly all functions used in this analysis
+library(rgdal)        #Spatial library - most functions used from rgdal are for vectors (shapefiles)
+library(rasterVis)    #Useful for raster visualizations
+library(maps)         #Has a database of maps. I use this to add a map to my raster to visualize land boundaries
+library(rgeos)        #Need this library for topology operations on geometries
+library(dplyr)        #NOT spatial - this is a data wrangling library
+library(RColorBrewer) #Also not spatial - used to set the spectral color scheme 
+library(sp)
+```
+
+```{r}
+# view some color palettes
+# display.brewer.all()
+# rainbow color scheme
+cols = rev(colorRampPalette(brewer.pal(11, 'Spectral'))(255)) 
+
+#setting smaller margins for plotting
+par(mar=c(2,2,1,1))
+```
+
+
+```{r}
+all_threats <- raster("full_modelnv.tif")
+```
+
+```{r}
+plot(all_threats,col=cols)
+```
+
+```{r}
+# add a landmap to your shapefile. the add=T argument tells R to add it to the existing plot.
+# make sure you understand what the other arguments do
+plot(all_threats,ext=extent(-130,-110,24,50),col=cols)
+map('world',fill=T,add=T,col='gray')
+```
+
+```{r}
+plot(all_threats,col=cols,ext=extent(-121,-117,32,35),main="Cumulative Threats") # A good extent for the Santa Barbara Channel
+```
+
