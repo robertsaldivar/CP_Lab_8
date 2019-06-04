@@ -51,3 +51,4 @@ map('world',fill=T,add=T,col='gray')
 plot(all_threats,col=cols,ext=extent(-121,-117,32,35),main="Cumulative Threats") # A good extent for the Santa Barbara Channel
 ```
 
+Adding the specific threats of Oil, trash, shipping and nutrients
